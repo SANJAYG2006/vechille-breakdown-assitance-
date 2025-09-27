@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto Rescue - Vehicle Breakdown Assistance</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body { background: #f6f7fb; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    .card { box-shadow: 0 6px 18px rgba(25,25,30,0.06); border: 0; border-radius: 12px; }
+    .small-muted { font-size: .85rem; color: #6b7280; }
+    .topbar { background: linear-gradient(90deg,#0f172a,#0b1220); color: #fff; }
+    .container-main { max-width: 1100px; margin: 24px auto; }
+    .btn-ghost { background: transparent; border: 1px solid rgba(0,0,0,0.05); }
+    #status { min-height: 1.6rem; margin-top: .5rem; color: #0b1220; font-weight:500; }
+    @media (max-width: 767px) { .split-col { flex-direction: column; } }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Auto Rescue</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="container text-center mt-5">
+    <h1 class="fw-bold">Welcome to Auto Rescue</h1>
+    <p class="lead">Get quick vehicle breakdown assistance in remote and rural areas</p>
+    <a href="#services" class="btn btn-primary btn-lg mt-3">Book Assistance</a>
+  </div>
+
+  <!-- Services Section -->
+  <div class="container mt-5" id="services">
+    <h2 class="text-center mb-4">Our Services</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Towing">
+          <div class="card-body text-center">
+            <h5 class="card-title">Towing Service</h5>
+            <p class="card-text">Get your vehicle safely to the nearest service center.</p>
+            <a href="#booking" class="btn btn-outline-primary">Request</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Mechanic">
+          <div class="card-body text-center">
+            <h5 class="card-title">Expert Mechanic</h5>
+            <p class="card-text">Book an appointment with skilled mechanics near you.</p>
+            <a href="#booking" class="btn btn-outline-primary">Book Now</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card shadow-sm">
+          <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Fuel Delivery">
+          <div class="card-body text-center">
+            <h5 class="card-title">Fuel Delivery</h5>
+            <p class="card-text">Stranded without fuel? Get it delivered to your location.</p>
+            <a href="#booking" class="btn btn-outline-primary">Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking + Auth + Requests -->
+  <main class="container-main mt-5" id="booking">
+    <div class="d-flex gap-4 split-col">
+      <!-- Left: Booking form + Auth -->
+      <div style="flex:1; min-width:300px">
+        <div class="card p-3 mb-3">
+          <h5 class="mb-2">Request Roadside Assistance</h5>
+          <form id="bookingForm" class="mt-2">
+            <div class="mb-2">
+              <label class="form-label small-muted">Name</label>
+              <input id="name" class="form-control" required>
+            </div>
+
+            <div class="mb-2 row g-2">
+              <div class="col">
+                <label class="form-label small-muted">Phone</label>
+                <input id="phone" class="form-control" required>
+              </div>
+              <div class="col">
+                <label class="form-label small-muted">Vehicle</label>
+                <input id="vehicle" class="form-control" placeholder="Make / Model / Reg" required>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label small-muted">Location</label>
+              <div class="input-group">
+                <input id="location" class="form-control" placeholder="Use 'My location' or type address" required>
+                <button id="locBtn" type="button" class="btn btn-outline-secondary">Use my location</button>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label small-muted">Problem</label>
+              <textarea id="desc" rows="2" class="form-control" placeholder="e.g. flat tyre, engine won't start"></textarea>
+            </div>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary" type="submit">Request Help</button>
+              <button id="clearBtn" type="button" class="btn btn-ghost">Clear</button>
+            </div>
+            <div id="status" class="mt-2"></div>
+          </form>
+        </div>
+
+        <div class="card p-3">
+          <h6 class="mb-2">Sign up / Log in</h6>
+          <div class="row g-2">
+            <div class="col-12"><input id="email" class="form-control" placeholder="Email"></div>
+            <div class="col-12"><input id="password" type="password" class="form-control" placeholder="Password"></div>
+            <div class="col-12 d-flex gap-2">
+              <button id="signup" class="btn btn-outline-success btn-sm">Sign Up</button>
+              <button id="login" class="btn btn-outline-primary btn-sm">Log In</button>
+              <button id="logout" class="btn btn-outline-danger btn-sm d-none">Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Requests list -->
+      <div style="flex:1; min-width:300px">
+        <h5 class="mb-2">Recent Requests</h5>
+        <div id="requestsList" class="d-grid gap-3">
+          <div class="card p-3 text-center small-muted">No requests yet</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center mt-5 p-3">
+    <p class="mb-0">&copy; 2025 Auto Rescue | Vehicle Breakdown Assistance</p>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <script>
+  const firebaseConfig = {
+    apiKey: "REPLACE_API_KEY",
+    authDomain: "REPLACE_PROJECT_ID.firebaseapp.com",
+    projectId: "REPLACE_PROJECT_ID",
+    storageBucket: "REPLACE_PROJECT_ID.appspot.com",
+    messagingSenderId: "REPLACE_MESSAGING_SENDER_ID",
+    appId: "REPLACE_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  const form = document.getElementById('bookingForm');
+  const locBtn = document.getElementById('locBtn');
+  const statusEl = document.getElementById('status');
+  const requestsList = document.getElementById('requestsList');
+  const signupBtn = document.getElementById('signup');
+  const loginBtn = document.getElementById('login');
+  const logoutBtn = document.getElementById('logout');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function showStatus(text, isError=false) {
+    statusEl.textContent = text;
+    statusEl.style.color = isError ? 'red' : 'black';
+  }
+
+  locBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) return showStatus('Geolocation not supported', true);
+    showStatus('Getting location...');
+    navigator.geolocation.getCurrentPosition((pos) => {
+      document.getElementById('location').value = pos.coords.latitude.toFixed(5) + "," + pos.coords.longitude.toFixed(5);
+      showStatus('Location set');
+    }, (err) => showStatus('Location error: ' + err.message, true));
+  });
+
+  clearBtn.addEventListener('click', () => form.reset());
+
+  signupBtn.addEventListener('click', async () => {
+    try { await auth.createUserWithEmailAndPassword(email.value, password.value); showStatus('Signed up & logged in'); }
+    catch(e) { showStatus(e.message,true); }
+  });
+  loginBtn.addEventListener('click', async () => {
+    try { await auth.signInWithEmailAndPassword(email.value, password.value); showStatus('Logged in'); }
+    catch(e) { showStatus(e.message,true); }
+  });
+  logoutBtn.addEventListener('click', async () => { await auth.signOut(); showStatus('Logged out'); });
+  auth.onAuthStateChanged(u => logoutBtn.classList.toggle('d-none',!u));
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+      name: name.value.trim(), phone: phone.value.trim(),
+      vehicle: vehicle.value.trim(), location: location.value.trim(),
+      desc: desc.value.trim(), status: 'requested',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    if(!data.name || !data.phone || !data.location) return showStatus('Fill required fields',true);
+    try { await db.collection('bookings').add(data); showStatus('Request submitted'); form.reset(); }
+    catch(err){ showStatus('Error: '+err.message,true); }
+  });
+
+  db.collection('bookings').orderBy('createdAt','desc').limit(25).onSnapshot(snap=>{
+    requestsList.innerHTML='';
+    if(snap.empty){requestsList.innerHTML='<div class="card p-3 text-center small-muted">No requests yet</div>'; return;}
+    snap.forEach(doc=>{
+      const d=doc.data();
+      const card=document.createElement('div');card.className='card p-3';
+      card.innerHTML=`<div><b>${d.name}</b> (${d.vehicle})<br><small>${d.desc||''}</small><br><small>${d.location}</small></div>`;
+      requestsList.appendChild(card);
+    });
+  });
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
